@@ -197,7 +197,7 @@ die($e-&gt;getMessage());<br>
 &lt;/tr&gt;<br>
 &lt;/thead&gt;<br>
 &lt;tbody&gt;<br>
-&lt;?php while($row= $result-&gt;fetch(PDO::FETCH_ASSOC)): ?&gt;<br><br>
+&lt;?php while($row= $result-&gt;fetch(PDO::FETCH_ASSOC)): ?&gt;<br>
 &lt;tr&gt;<br>
 &lt;td&gt;&lt;?= $row['id'] ?&gt;&lt;/td&gt;<br>
 &lt;td&gt;&lt;?= $row['name'] ?&gt;&lt;/td&gt;<br>
