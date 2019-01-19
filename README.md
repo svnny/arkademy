@@ -1,235 +1,219 @@
-# jawaban soal no. 1
-# demo https://muhammad-f-huda.herokuapp.com/arkademy/jawaban-1.php
-<?php
-
-function my_profile() {
-  $data= [
-    'name'=> 'Muhammad Fadkul Huda',
-    'address'=> 'Dsn. Prenggan, RT10/RW02, Ds. Polosiri, Kec. Bawen, Kab. Semarang',
-    'hobbies'=> [
-      'coding'
-    ],
-    'is_married'=> FALSE,
-    'school'=> [
-      'highSchool'=> 'SMK Muhammadiyah Salatiga'
-    ],
-    'skills'=> [
-      'PHP'=> [
-        'CodeIgniter'
-      ],
-      'JavaScript'=> [
-        'jQuerey'
-      ],
-      'CSS/HTML'=> [
-        'Bootsrap'
-      ]
-    ]
-  ];
-  return(json_encode($data));
-}
-
-echo my_profile();
-?>
-
-# jawaban soal no. 2
-# demo https://muhammad-f-huda.herokuapp.com/arkademy/jawaban-2.php
-<?php
-header('Content-Type: text/plain');
-
-function is_username_valid($string) {
-  if(preg_match('|^[a-z_]{8}$|', $string)) {
-    return(TRUE);
-  }
-  return(FALSE);
-}
-// return false
-var_dump(is_username_valid('jakarta'));
-var_dump(is_username_valid('solo abc'));
-var_dump(is_username_valid('_soetami_'));
-// return true
-var_dump(is_username_valid('_jakarta'));
-var_dump(is_username_valid('solo_abc'));
-var_dump(is_username_valid('soetami_'));
-echo("\r\n\r\n");
-
-function is_password_valid($string) {
-if(preg_match('|[A-Z]|', $string) && preg_match('|[a-z]|', $string) && preg_match('|[\d]|', $string) && preg_match('|[)<~!@#$%^&*?+>_\s(-]|', $string) && strlen($string)==8) {
-    return(TRUE);
-  }
-  return(FALSE);
-}
-// return false
-var_dump(is_password_valid('Qwertyu1'));
-var_dump(is_password_valid('#Qwert1'));
-var_dump(is_password_valid('@$^(&%_+'));
-// return true
-var_dump(is_password_valid('wsxE99##'));
-var_dump(is_password_valid('sw1p3^UP'));
-?>
-
-# jawaban soal no. 3
-# demo https://muhammad-f-huda.herokuapp.com/arkademy/jawaban-3.php
-<?php
-header('Content-Type: text/plain');
-
-function draw_kotak($panjang) {
-    for($x=1; $x<=$panjang; $x++) {
-        for($i=1; $i<=$panjang; $i++) {
-            if($x%2==0) {
-                if($i%2==0) {
-                    echo('*   ');
-                } else {
-                    echo('    ');
-                }
-            } else {
-                if($i%2==0) {
-                    echo('    ');
-                } else {
-                    echo('*   ');
-                }
-            }
-        }
-        echo("\r\n\r\n");
-    }
-}
-
-draw_kotak(7);
-echo("\r\n\r\n");
-draw_kotak(5);
-?>
-
-# jawaban soal no. 4
-# demo https://muhammad-f-huda.herokuapp.com/arkademy/jawaban-4.php
-<?php
-header('Content-Type: text/plain');
-
-function print_abc($kolom, $baris) {
-  $abjad= 'abcdefghijklmnopqrstuvwxyz';
-  $index= 0;
-  $string= '';
-  for($x=1; $x<=$baris; $x++) {
-    for($i=1; $i<=$kolom; $i++) {
-      $string.= $abjad[$index].'  ';
-      $index++;
-    }
-    $string.= "\r\n\r\n";
-  }
-  echo($string);
-}
-
-print_abc(3, 4);
-?>
-
-# jawaban soal no. 5
-# demo https://muhammad-f-huda.herokuapp.com/arkademy/jawaban-5.php
-<?php
-header('Content-Type: text/plain');
-
-function count_handshake($total_orang) {
-  $total= 0;
-  for($i=1; $i<=$total_orang; $i++) {
-    for($ii=1; $ii<$total_orang; $ii++) {
-      $total+= 1;
-    }
-  }
-  echo($total/2);
-}
-
-count_handshake(3);
-echo("\r\n");
-count_handshake(6);
-?>
-
-# jawaban soal no. 6
--- table categories
-CREATE TABLE `categories` (
-  `id` INT(1) NOT NULL PRIMARY KEY,
-  `name` VARCHAR(16) NOT NULL,
-) ENGINE=InnoDB;
-
--- insert data
-INSERT INTO `categories` (`id`, `name`) VALUES
-(1, 'nurhadi'),
-(2, 'aldo'),
-(3, 'dodi');
-
--- table hobbies
-CREATE TABLE `hobbies` (
-  `id` INT(1) NOT NULL PRIMARY KEY,
-  `person_id` INT(1) NOT NULL,
-  `name` VARCHAR(16) NOT NULL,
-   FOREIGN KEY person_hobbies(person_id) REFERENCES categories(id)
-) ENGINE=InnoDB;
-
--- insert data
-INSERT INTO `hobbies` (`id`, `person_id`, `name`) VALUES
-(1, 1, 'Bird watching'),
-(2, 1, 'Martial arts'),
-(3, 2, 'Hiking'),
-(4, 1, 'Archery'),
-(5, 2, 'Beekeeping'),
-(6, 3, 'Book restoration');
-
--- join
-SELECT categories.name, categories.id, GROUP_CONCAT(hobbies.name SEPARATOR ', ') AS hobbies_name
-FROM categories
-LEFT JOIN hobbies ON categories.id=hobbies.person_id
-GROUP BY categories.id
-ORDER BY categories.id ASC
-
-# jawaban soal no. 7
-# demo http:/fullclip.top/arkademy/jawaban-7.php
-<?php
-try {
-  $host= '';
-  $dbname= '';
-  $user= '';
-  $pass= '';
-  $pdo= new PDO("mysql:host=$host;dbname=$dbname", $user, $pass);
-  $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-  $result= $pdo->query("SELECT categories.name, categories.id, GROUP_CONCAT(hobbies.name SEPARATOR ', ') AS hobbies_name FROM categories LEFT JOIN hobbies ON categories.id=hobbies.person_id GROUP BY categories.id ORDER BY categories.id ASC");
-} catch(PDOException $e) {
-  die($e->getMessage());
-}
-?>
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>SQL Join</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-</head>
-
-<body>
-    <nav class="navbar navbar-default navbar-static-top">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="#">Capres No. 10</a>
-            </div>
-        </div>
-    </nav>
-    <div class="container">
-
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>person_id</th>
-                    <th>name</th>
-                    <th>person_hobbies</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php while($row= $result->fetch(PDO::FETCH_ASSOC)): ?>
-                <tr>
-                    <td><?= $row['id'] ?></td>
-                    <td><?= $row['name'] ?></td>
-                    <td><?= $row['hobbies_name'] ?></td>
-                </tr>
-                <?php endwhile ?>
-            </tbody>
-        </table>
-    </div>
-</body>
-
-</html>
+<h1><a id="jawaban_soal_no_1_0"></a>jawaban soal no. 1</h1>
+<p>demo <a href="https://muhammad-f-huda.herokuapp.com/jawaban-1.php">https://muhammad-f-huda.herokuapp.com/jawaban-1.php</a><br>
+&lt;?php</p>
+<p>function my_profile() {<br>
+$data= [<br>
+‘name’=&gt; ‘Muhammad Fadkul Huda’,<br>
+‘address’=&gt; ‘Dsn. Prenggan, RT10/RW02, Ds. Polosiri, Kec. Bawen, Kab. Semarang’,<br>
+‘hobbies’=&gt; [<br>
+‘coding’<br>
+],<br>
+‘is_married’=&gt; FALSE,<br>
+‘school’=&gt; [<br>
+‘highSchool’=&gt; ‘SMK Muhammadiyah Salatiga’<br>
+],<br>
+‘skills’=&gt; [<br>
+‘PHP’=&gt; [<br>
+‘CodeIgniter’<br>
+],<br>
+‘JavaScript’=&gt; [<br>
+‘jQuerey’<br>
+],<br>
+‘CSS/HTML’=&gt; [<br>
+‘Bootsrap’<br>
+]<br>
+]<br>
+];<br>
+return(json_encode($data));<br>
+}</p>
+<p>echo my_profile();<br>
+?&gt;</p>
+<h1><a id="jawaban_soal_no_2_33"></a>jawaban soal no. 2</h1>
+<p>demo <a href="https://muhammad-f-huda.herokuapp.com/jawaban-2.php">https://muhammad-f-huda.herokuapp.com/jawaban-2.php</a><br>
+&lt;?php<br>
+header(‘Content-Type: text/plain’);</p>
+<p>function is_username_valid($string) {<br>
+if(preg_match(’|<sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup>{8}$|’, $string)) {<br>
+return(TRUE);<br>
+}<br>
+return(FALSE);<br>
+}<br>
+// return false<br>
+var_dump(is_username_valid(‘jakarta’));<br>
+var_dump(is_username_valid(‘solo abc’));<br>
+var_dump(is_username_valid(’<em>soetami</em>‘));<br>
+// return true<br>
+var_dump(is_username_valid(’<em>jakarta’));<br>
+var_dump(is_username_valid(‘solo_abc’));<br>
+var_dump(is_username_valid('soetami</em>'));<br>
+echo(&quot;\r\n\r\n&quot;);</p>
+<p>function is_password_valid($string) {<br>
+if(preg_match(’|[A-Z]|’, $string) &amp;&amp; preg_match(’|[a-z]|’, $string) &amp;&amp; preg_match(’|[\d]|’, $string) &amp;&amp; preg_match(’|[)&lt;~!@#$%^&amp;*?+&gt;<em>\s(-]|’, $string) &amp;&amp; strlen($string)==8) {<br>
+return(TRUE);<br>
+}<br>
+return(FALSE);<br>
+}<br>
+// return false<br>
+var_dump(is_password_valid(‘Qwertyu1’));<br>
+var_dump(is_password_valid(’#Qwert1’));<br>
+var_dump(is_password_valid(’@$^(&amp;%</em>+’));<br>
+// return true<br>
+var_dump(is_password_valid(‘wsxE99##’));<br>
+var_dump(is_password_valid(‘sw1p3^UP’));<br>
+?&gt;</p>
+<h1><a id="jawaban_soal_no_3_69"></a>jawaban soal no. 3</h1>
+<p>demo <a href="https://muhammad-f-huda.herokuapp.com/jawaban-3.php">https://muhammad-f-huda.herokuapp.com/jawaban-3.php</a><br>
+&lt;?php<br>
+header(‘Content-Type: text/plain’);</p>
+<p>function draw_kotak($panjang) {<br>
+for($x=1; $x&lt;=$panjang; $x++) {<br>
+for($i=1; $i&lt;=$panjang; $i++) {<br>
+if($x%2<mark>0) {<br>
+if($i%2</mark>0) {<br>
+echo(’*   ‘);<br>
+} else {<br>
+echo(’    ‘);<br>
+}<br>
+} else {<br>
+if($i%2==0) {<br>
+echo(’    ‘);<br>
+} else {<br>
+echo(’*   ');<br>
+}<br>
+}<br>
+}<br>
+echo(&quot;\r\n\r\n&quot;);<br>
+}<br>
+}</p>
+<p>draw_kotak(7);<br>
+echo(&quot;\r\n\r\n&quot;);<br>
+draw_kotak(5);<br>
+?&gt;</p>
+<h1><a id="jawaban_soal_no_4_100"></a>jawaban soal no. 4</h1>
+<p>demo <a href="https://muhammad-f-huda.herokuapp.com/jawaban-4.php">https://muhammad-f-huda.herokuapp.com/jawaban-4.php</a><br>
+&lt;?php<br>
+header(‘Content-Type: text/plain’);</p>
+<p>function print_abc($kolom, $baris) {<br>
+$abjad= ‘abcdefghijklmnopqrstuvwxyz’;<br>
+$index= 0;<br>
+$string= ‘’;<br>
+for($x=1; $x&lt;=$baris; $x++) {<br>
+for($i=1; $i&lt;=$kolom; $i++) {<br>
+$string.= $abjad[$index].’  ';<br>
+$index++;<br>
+}<br>
+$string.= “\r\n\r\n”;<br>
+}<br>
+echo($string);<br>
+}</p>
+<p>print_abc(3, 4);<br>
+?&gt;</p>
+<h1><a id="jawaban_soal_no_5_122"></a>jawaban soal no. 5</h1>
+<p>demo <a href="https://muhammad-f-huda.herokuapp.com/jawaban-5.php">https://muhammad-f-huda.herokuapp.com/jawaban-5.php</a><br>
+&lt;?php<br>
+header(‘Content-Type: text/plain’);</p>
+<p>function count_handshake($total_orang) {<br>
+$total= 0;<br>
+for($i=1; $i&lt;=$total_orang; $i++) {<br>
+for($ii=1; $ii&lt;$total_orang; $ii++) {<br>
+$total+= 1;<br>
+}<br>
+}<br>
+echo($total/2);<br>
+}</p>
+<p>count_handshake(3);<br>
+echo(&quot;\r\n&quot;);<br>
+count_handshake(6);<br>
+?&gt;</p>
+<h1><a id="jawaban_soal_no_6_142"></a>jawaban soal no. 6</h1>
+<p>– table categories<br>
+CREATE TABLE <code>categories</code> (<br>
+<code>id</code> INT(1) NOT NULL PRIMARY KEY,<br>
+<code>name</code> VARCHAR(16) NOT NULL,<br>
+) ENGINE=InnoDB;</p>
+<p>– insert data<br>
+INSERT INTO <code>categories</code> (<code>id</code>, <code>name</code>) VALUES<br>
+(1, ‘nurhadi’),<br>
+(2, ‘aldo’),<br>
+(3, ‘dodi’);</p>
+<p>– table hobbies<br>
+CREATE TABLE <code>hobbies</code> (<br>
+<code>id</code> INT(1) NOT NULL PRIMARY KEY,<br>
+<code>person_id</code> INT(1) NOT NULL,<br>
+<code>name</code> VARCHAR(16) NOT NULL,<br>
+FOREIGN KEY person_hobbies(person_id) REFERENCES categories(id)<br>
+) ENGINE=InnoDB;</p>
+<p>– insert data<br>
+INSERT INTO <code>hobbies</code> (<code>id</code>, <code>person_id</code>, <code>name</code>) VALUES<br>
+(1, 1, ‘Bird watching’),<br>
+(2, 1, ‘Martial arts’),<br>
+(3, 2, ‘Hiking’),<br>
+(4, 1, ‘Archery’),<br>
+(5, 2, ‘Beekeeping’),<br>
+(6, 3, ‘Book restoration’);</p>
+<p>– join<br>
+SELECT <a href="http://categories.name">categories.name</a>, <a href="http://categories.id">categories.id</a>, GROUP_CONCAT(<a href="http://hobbies.name">hobbies.name</a> SEPARATOR ', ') AS hobbies_name<br>
+FROM categories<br>
+LEFT JOIN hobbies ON categories.id=hobbies.person_id<br>
+GROUP BY <a href="http://categories.id">categories.id</a><br>
+ORDER BY <a href="http://categories.id">categories.id</a> ASC</p>
+<h1><a id="jawaban_soal_no_7_179"></a>jawaban soal no. 7</h1>
+<p>demo <a href="http://fullclip.top/arkademy/jawaban-7.php">http://fullclip.top/arkademy/jawaban-7.php</a><br>
+&lt;?php<br>
+try {<br>
+$host= ‘’;<br>
+$dbname= ‘’;<br>
+$user= ‘’;<br>
+$pass= ‘’;<br>
+$pdo= new PDO(“mysql:host=$host;dbname=$dbname”, $user, $pass);<br>
+$pdo-&gt;setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);<br>
+$result= $pdo-&gt;query(“SELECT <a href="http://categories.name">categories.name</a>, <a href="http://categories.id">categories.id</a>, GROUP_CONCAT(<a href="http://hobbies.name">hobbies.name</a> SEPARATOR ', ') AS hobbies_name FROM categories LEFT JOIN hobbies ON categories.id=hobbies.person_id GROUP BY <a href="http://categories.id">categories.id</a> ORDER BY <a href="http://categories.id">categories.id</a> ASC”);<br>
+} catch(PDOException $e) {<br>
+die($e-&gt;getMessage());<br>
+}<br>
+?&gt;<br>
+&lt;!DOCTYPE html&gt;<br>
+&lt;html lang=“en”&gt;</p>
+<p>&lt;head&gt;<br>
+&lt;meta name=“viewport” content=“width=device-width, initial-scale=1”&gt;<br>
+&lt;title&gt;SQL Join&lt;/title&gt;<br>
+&lt;link rel=“stylesheet” href=&quot;<a href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css</a>&quot;&gt;<br>
+&lt;/head&gt;</p>
+<p>&lt;body&gt;<br>
+&lt;nav class=“navbar navbar-default navbar-static-top”&gt;<br>
+&lt;div class=“container-fluid”&gt;<br>
+&lt;div class=“navbar-header”&gt;<br>
+&lt;a class=“navbar-brand” href=&quot;#&quot;&gt;Capres No. 10&lt;/a&gt;<br>
+&lt;/div&gt;<br>
+&lt;/div&gt;<br>
+&lt;/nav&gt;<br>
+&lt;div class=“container”&gt;</p>
+<pre><code>    &lt;table class=&quot;table table-bordered&quot;&gt;
+        &lt;thead&gt;
+            &lt;tr&gt;
+                &lt;th&gt;person_id&lt;/th&gt;
+                &lt;th&gt;name&lt;/th&gt;
+                &lt;th&gt;person_hobbies&lt;/th&gt;
+            &lt;/tr&gt;
+        &lt;/thead&gt;
+        &lt;tbody&gt;
+            &lt;?php while($row= $result-&gt;fetch(PDO::FETCH_ASSOC)): ?&gt;
+            &lt;tr&gt;
+                &lt;td&gt;&lt;?= $row['id'] ?&gt;&lt;/td&gt;
+                &lt;td&gt;&lt;?= $row['name'] ?&gt;&lt;/td&gt;
+                &lt;td&gt;&lt;?= $row['hobbies_name'] ?&gt;&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;?php endwhile ?&gt;
+        &lt;/tbody&gt;
+    &lt;/table&gt;
+&lt;/div&gt;
+</code></pre>
+<p>&lt;/body&gt;</p>
+<p>&lt;/html&gt;</p>
+<hr class="footnotes-sep">
+<section class="footnotes">
+<ol class="footnotes-list">
+<li id="fn1"  class="footnote-item"><p>a-z_ <a href="#fnref1" class="footnote-backref">↩</a></p>
+</li>
+</ol>
+</section>
