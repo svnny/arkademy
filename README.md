@@ -188,32 +188,24 @@ die($e-&gt;getMessage());<br>
 &lt;/div&gt;<br>
 &lt;/nav&gt;<br>
 &lt;div class=“container”&gt;</p>
-<pre><code>    &lt;table class=&quot;table table-bordered&quot;&gt;
-        &lt;thead&gt;
-            &lt;tr&gt;
-                &lt;th&gt;person_id&lt;/th&gt;
-                &lt;th&gt;name&lt;/th&gt;
-                &lt;th&gt;person_hobbies&lt;/th&gt;
-            &lt;/tr&gt;
-        &lt;/thead&gt;
-        &lt;tbody&gt;
-            &lt;?php while($row= $result-&gt;fetch(PDO::FETCH_ASSOC)): ?&gt;
-            &lt;tr&gt;
-                &lt;td&gt;&lt;?= $row['id'] ?&gt;&lt;/td&gt;
-                &lt;td&gt;&lt;?= $row['name'] ?&gt;&lt;/td&gt;
-                &lt;td&gt;&lt;?= $row['hobbies_name'] ?&gt;&lt;/td&gt;
-            &lt;/tr&gt;
-            &lt;?php endwhile ?&gt;
-        &lt;/tbody&gt;
-    &lt;/table&gt;
+&lt;table class=&quot;table table-bordered&quot;&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;person_id&lt;/th&gt;
+&lt;th&gt;name&lt;/th&gt;
+&lt;th&gt;person_hobbies&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;?php while($row= $result-&gt;fetch(PDO::FETCH_ASSOC)): ?&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;?= $row['id'] ?&gt;&lt;/td&gt;
+&lt;td&gt;&lt;?= $row['name'] ?&gt;&lt;/td&gt;
+&lt;td&gt;&lt;?= $row['hobbies_name'] ?&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;?php endwhile ?&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
 &lt;/div&gt;
-</code></pre>
 <p>&lt;/body&gt;</p>
 <p>&lt;/html&gt;</p>
-<hr class="footnotes-sep">
-<section class="footnotes">
-<ol class="footnotes-list">
-<li id="fn1"  class="footnote-item"><p>a-z_ <a href="#fnref1" class="footnote-backref">↩</a></p>
-</li>
-</ol>
-</section>
