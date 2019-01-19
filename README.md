@@ -188,24 +188,24 @@ die($e-&gt;getMessage());<br>
 &lt;/div&gt;<br>
 &lt;/nav&gt;<br>
 &lt;div class=“container”&gt;</p>
-&lt;table class=&quot;table table-bordered&quot;&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;person_id&lt;/th&gt;
-&lt;th&gt;name&lt;/th&gt;
-&lt;th&gt;person_hobbies&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;?php while($row= $result-&gt;fetch(PDO::FETCH_ASSOC)): ?&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;?= $row['id'] ?&gt;&lt;/td&gt;
-&lt;td&gt;&lt;?= $row['name'] ?&gt;&lt;/td&gt;
-&lt;td&gt;&lt;?= $row['hobbies_name'] ?&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;?php endwhile ?&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;/div&gt;
+&lt;table class=&quot;table table-bordered&quot;&gt;<br>
+&lt;thead&gt;<br>
+&lt;tr&gt;<br>
+&lt;th&gt;person_id&lt;/th&gt;<br>
+&lt;th&gt;name&lt;/th&gt;<br>
+&lt;th&gt;person_hobbies&lt;/th&gt;<br>
+&lt;/tr&gt;<br>
+&lt;/thead&gt;<br>
+&lt;tbody&gt;<br>
+&lt;?php while($row= $result-&gt;fetch(PDO::FETCH_ASSOC)): ?&gt;<br><br>
+&lt;tr&gt;<br>
+&lt;td&gt;&lt;?= $row['id'] ?&gt;&lt;/td&gt;<br>
+&lt;td&gt;&lt;?= $row['name'] ?&gt;&lt;/td&gt;<br>
+&lt;td&gt;&lt;?= $row['hobbies_name'] ?&gt;&lt;/td&gt;<br>
+&lt;/tr&gt;<br>
+&lt;?php endwhile ?&gt;<br>
+&lt;/tbody&gt;<br>
+&lt;/table&gt;<br>
+&lt;/div&gt;<br>
 <p>&lt;/body&gt;</p>
 <p>&lt;/html&gt;</p>
